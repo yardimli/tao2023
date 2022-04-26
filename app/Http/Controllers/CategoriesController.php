@@ -42,6 +42,7 @@ class CategoriesController extends Controller
 	    $datas = $request->input('datas');
 
 	    $dataArr = explode("),",$datas);
+	    array_pop($dataArr);
 
 	    foreach($dataArr as $dataRow){
 		    $dataRow1 = ltrim($dataRow, '(');
