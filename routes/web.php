@@ -15,6 +15,10 @@ use App\Http\Controllers\HeaderController;
 |
 */
 
+Route::get('/', function () {
+	return redirect('index');
+});
+
 Route::resource('/{pageName}', HeaderController::class);
 
 Route::resource('/insertCategory',CategoriesController::class);

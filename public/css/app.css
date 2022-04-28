@@ -840,7 +840,7 @@ header {
 	min-width: 580px;
 	margin-left: 220px;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,.12);
-	height: 220px;
+	/*height: 200px;*/
 	overflow: scroll;
 }
 
