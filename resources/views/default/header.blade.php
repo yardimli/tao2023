@@ -28,9 +28,17 @@
                 <li class="current-menu-item"><a href="index">Home</a></li>
                 <li class="menu-item-has-children"><a href="categories">Categories</a>
                     <ul class="sub-menu">
-                        <li><a href="categories">Politics</a></li>
-                        <li><a href="categories">Health</a></li>
-                        <li><a href="categories">Design</a></li>
+                        @foreach( $parentCategories as $parentCategory)
+                            <li class="menu-item-has-children"><a href="#">{{ $parentCategory['category_name'] }}</a>
+                                <div class="sub2-menu">
+                                    @foreach($childCategories as $childCategory)
+                                        @if( $childCategory['parentID'] === $parentCategory['catID'])
+                                            <p><a href="#">{{ $childCategory['category_name'] }}</a></p>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </li>
                 <li><a href="typography">Typography</a></li>

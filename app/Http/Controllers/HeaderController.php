@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
-class CategoriesController extends Controller
+class HeaderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pageName)
     {
+	    $parentCategories = Category::where('parentID','=',0)->get();
+	    $childCategories = Category::where('parentID','!=',0)->get();
+
+	    return view($pageName, [
+		    'parentCategories' => $parentCategories,
+		    'childCategories' => $childCategories
+	    ]);
     }
 
     /**
@@ -34,27 +41,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-	    $datas = $request->input('datas');
-
-	    $dataArr = explode("),",$datas);
-	    array_pop($dataArr);
-
-	    foreach($dataArr as $dataRow){
-		    $dataRow1 = ltrim($dataRow, '(');
-		    $dataRow1 = str_replace(["'"], "", $dataRow1);
-		    $data = explode(",",$dataRow1);
-		    Category::create([
-			    'parentID'=> (int)$data[1],
-			    'text_count'=> (int)$data[2],
-			    'new_texts'=> (int)$data[3],
-			    'read_count'=> (int)$data[4],
-			    'category_name'=> $data[5],
-			    'picture'=> $data[6],
-			    'slug_en'=> $data[7]
-		    ]);
-	    }
-
-	    return redirect('/insertCategory');
+        //
     }
 
     /**

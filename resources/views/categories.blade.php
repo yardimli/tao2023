@@ -1,6 +1,5 @@
 @extends('default.headAndFooter')
 
-
 @section('content')
     <body class="archive">
         <div class="top-scroll-bar"></div>
@@ -9,6 +8,11 @@
             <header id="header" class="d-lg-block d-none">
                 @include('default.header')
             </header>
+            <div>
+                {{--@foreach( $parentCategories as $parentCategory)--}}
+                    {{--{{ $parentCategory }}--}}
+                {{--@endforeach--}}
+            </div>
             <main id="content">
                 <div class="content-widget">
                     <div class="container">
@@ -22,12 +26,12 @@
                                     <h1 class="entry-title mb-3"><a href="single">Home Internet Is Becoming a Luxury for the Wealthy</a></h1>
                                     <div class="entry-excerpt">
                                         <p>
-                                           And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far. 
+                                           And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far.
                                         </p>
                                     </div>
                                     <div class="entry-meta align-items-center">
                                         <a class="author-avatar" href="#"><img src="/images/author-avata-1.jpg" alt=""></a>
-                                        <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>                                  
+                                        <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>
                                         <span>Jun 14</span>
                                         <span class="middotDivider"></span>
                                         <span class="readingTime" title="3 min read">3 min read</span>
@@ -37,8 +41,8 @@
                                             </svg>
                                         </span>
                                     </div>
-                                </article> 
-                                <div class="divider"></div>                
+                                </article>
+                                <div class="divider"></div>
                                 <article class="row justify-content-between mb-5 mr-0">
                                     <div class="col-md-9 ">
                                         <div class="align-self-center">
@@ -46,11 +50,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Home Internet Is Becoming a Luxury for the Wealthy</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                   And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far. 
+                                                   And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far.
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>                                    
+                                                <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>
                                                 <span>May 21</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">5 min read</span>
@@ -71,11 +75,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Why Lack of Sleep is So Bad For You</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                  A lack of sleep is linked to an incredibly wide range of ailments, from heart disease and Type 2 diabetes to obesity, depression, poor cognitive function, and even Alzheimer's disease.. 
+                                                  A lack of sleep is linked to an incredibly wide range of ailments, from heart disease and Type 2 diabetes to obesity, depression, poor cognitive function, and even Alzheimer's disease..
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Darcy Reeder</a> in <a href="archive">OneZero</a><br>                                    
+                                                <a href="author">Darcy Reeder</a> in <a href="archive">OneZero</a><br>
                                                 <span>Jun 17</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">3 min read</span>
@@ -96,11 +100,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Regulators Just Put a Target on Apple's Back</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                   Excellence is the most important habit you can curate in life because it requires doing things you don't want to do and getting uncomfortable on a daily basis. 
+                                                   Excellence is the most important habit you can curate in life because it requires doing things you don't want to do and getting uncomfortable on a daily basis.
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Azimi ??kalo</a> in <a href="archive">Freedom</a><br>                                    
+                                                <a href="author">Azimi ??kalo</a> in <a href="archive">Freedom</a><br>
                                                 <span>May 12</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">8 min read</span>
@@ -121,11 +125,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Apple Is Designing for a Post-Facebook World</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                   And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far. 
+                                                   And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far.
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>                                    
+                                                <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>
                                                 <span>Jun 12</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">7 min read</span>
@@ -146,11 +150,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">What Really Happens to AirPods When They Die</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                   At WWDC, Apple debuted a slew of new features that let users connect with their families and friends right inside Apple's apps'''no social. 
+                                                   At WWDC, Apple debuted a slew of new features that let users connect with their families and friends right inside Apple's apps'''no social.
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Johan Doan</a> in <a href="archive">Lifestyle</a><br>                                    
+                                                <a href="author">Johan Doan</a> in <a href="archive">Lifestyle</a><br>
                                                 <span>May 15</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">5 min read</span>
@@ -170,10 +174,10 @@
                                     <article class="col-md-6">
                                         <div class="mb-3 d-flex row">
                                             <figure class="col-md-5"><a href="single"><img src="http://via.placeholder.com/512x512" alt="post-title"></a></figure>
-                                            <div class="entry-content col-md-7 pl-md-0">                                    
+                                            <div class="entry-content col-md-7 pl-md-0">
                                                 <h5 class="entry-title mb-3"><a href="single">I Learned How to Die Before I Knew How to Live</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Anna Goldfarb</a> in <a href="archive">Fashion</a><br>                                    
+                                                    <a href="author">Anna Goldfarb</a> in <a href="archive">Fashion</a><br>
                                                     <span>March 12</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">4 min read</span>
@@ -189,10 +193,10 @@
                                     <article class="col-md-6">
                                         <div class="mb-3 d-flex row">
                                             <figure class="col-md-5"><a href="single"><img src="http://via.placeholder.com/512x512" alt="post-title"></a></figure>
-                                            <div class="entry-content col-md-7 pl-md-0">                                    
+                                            <div class="entry-content col-md-7 pl-md-0">
                                                 <h5 class="entry-title mb-3"><a href="single">Is 'Interactive Storytelling' the Future of Media?</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Furukawa</a> in <a href="archive">Programing</a><br>                                    
+                                                    <a href="author">Furukawa</a> in <a href="archive">Programing</a><br>
                                                     <span>March 14</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">6 min read</span>
@@ -208,10 +212,10 @@
                                     <article class="col-md-6">
                                         <div class="mb-3 d-flex row">
                                             <figure class="col-md-5"><a href="single"><img src="http://via.placeholder.com/512x512" alt="post-title"></a></figure>
-                                            <div class="entry-content col-md-7 pl-md-0">                                    
+                                            <div class="entry-content col-md-7 pl-md-0">
                                                 <h5 class="entry-title mb-3"><a href="single">How NOT to get a $30k bill from Firebase</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Glorida</a> in <a href="archive">Living</a><br>                                    
+                                                    <a href="author">Glorida</a> in <a href="archive">Living</a><br>
                                                     <span>April 14</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">7 min read</span>
@@ -227,10 +231,10 @@
                                     <article class="col-md-6">
                                         <div class="mb-3 d-flex row">
                                             <figure class="col-md-5"><a href="single"><img src="http://via.placeholder.com/512x512" alt="post-title"></a></figure>
-                                            <div class="entry-content col-md-7 pl-md-0">                                    
+                                            <div class="entry-content col-md-7 pl-md-0">
                                                 <h5 class="entry-title mb-3"><a href="single">Google Can't Figure Out What YouTube Is</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Rayan Mark</a> in <a href="archive">GEN</a><br>                                    
+                                                    <a href="author">Rayan Mark</a> in <a href="archive">GEN</a><br>
                                                     <span>Jun 14</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">8 min read</span>
@@ -251,11 +255,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Home Internet Is Becoming a Luxury for the Wealthy</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                   And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far. 
+                                                   And black on meretriciously regardless well fearless irksomely as about hideous wistful bat less oh much and occasional useful rat darn jeepers far.
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>                                    
+                                                <a href="author">Dave Gershgorn</a> in <a href="archive">OneZero</a><br>
                                                 <span>May 21</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">5 min read</span>
@@ -276,11 +280,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Why Lack of Sleep is So Bad For You</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                  A lack of sleep is linked to an incredibly wide range of ailments, from heart disease and Type 2 diabetes to obesity, depression, poor cognitive function, and even Alzheimer's disease.. 
+                                                  A lack of sleep is linked to an incredibly wide range of ailments, from heart disease and Type 2 diabetes to obesity, depression, poor cognitive function, and even Alzheimer's disease..
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Darcy Reeder</a> in <a href="archive">OneZero</a><br>                                    
+                                                <a href="author">Darcy Reeder</a> in <a href="archive">OneZero</a><br>
                                                 <span>Jun 17</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">3 min read</span>
@@ -301,11 +305,11 @@
                                             <h3 class="entry-title mb-3"><a href="single">Regulators Just Put a Target on Apple's Back</a></h3>
                                             <div class="entry-excerpt">
                                                 <p>
-                                                   Excellence is the most important habit you can curate in life because it requires doing things you don't want to do and getting uncomfortable on a daily basis. 
+                                                   Excellence is the most important habit you can curate in life because it requires doing things you don't want to do and getting uncomfortable on a daily basis.
                                                 </p>
                                             </div>
                                             <div class="entry-meta align-items-center">
-                                                <a href="author">Azimi ??kalo</a> in <a href="archive">Freedom</a><br>                                    
+                                                <a href="author">Azimi ??kalo</a> in <a href="archive">Freedom</a><br>
                                                 <span>May 12</span>
                                                 <span class="middotDivider"></span>
                                                 <span class="readingTime" title="3 min read">8 min read</span>
@@ -331,7 +335,7 @@
                                 </ul>
 
                             </div> <!--col-md-8-->
-                            <div class="col-md-4 pl-md-5 sticky-sidebar">                    
+                            <div class="col-md-4 pl-md-5 sticky-sidebar">
                                 <div class="sidebar-widget latest-tpl-4">
                                     <h5 class="spanborder widget-title">
                                         <span>Popular in Culture</span>
@@ -342,7 +346,7 @@
                                             <div class="post-content">
                                                 <h5 class="entry-title mb-3"><a href="single">President and the emails. Who will guard the guards?</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>                                    
+                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>
                                                     <span>May 14</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">3 min read</span>
@@ -359,7 +363,7 @@
                                             <div class="post-content">
                                                 <h5 class="entry-title mb-3"><a href="single">How to Silence the Persistent Ding of Modern Life</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>                                    
+                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>
                                                     <span>Jun 12</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">4 min read</span>
@@ -376,7 +380,7 @@
                                             <div class="post-content">
                                                 <h5 class="entry-title mb-3"><a href="single">Why We Love to Watch</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>                                    
+                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>
                                                     <span>May 15</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">5 min read</span>
@@ -393,7 +397,7 @@
                                             <div class="post-content">
                                                 <h5 class="entry-title mb-3"><a href="single">How Health Apps Let</a></h5>
                                                 <div class="entry-meta align-items-center">
-                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>                                    
+                                                    <a href="author">Alentica</a> in <a href="archive">Police</a><br>
                                                     <span>April 27</span>
                                                     <span class="middotDivider"></span>
                                                     <span class="readingTime" title="3 min read">6 min read</span>
