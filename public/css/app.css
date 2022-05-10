@@ -851,15 +851,15 @@ header {
 }
 
 
-#main-menu .menu-primary .sub2-menu p {
+#main-menu .menu-primary .sub2-menu div {
 	display: inline-block;
 	line-height: 1.2;
 	padding: 10px !important;
 	width: 180px;
-	height: 48px;
+	height: 34px;
 	margin-bottom: -1px;
 	margin-left: -1px;
-	border: 1px dashed #c6c8ca;
+	/*border: 1px dashed #c6c8ca;*/
 }
 
 #main-menu .menu-primary li ul.sub-menu a {

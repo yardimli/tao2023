@@ -33,7 +33,7 @@
                                 <div class="sub2-menu">
                                     @foreach($childCategories as $childCategory)
                                         @if( $childCategory['parentID'] === $parentCategory['catID'])
-                                            <p><a href="#">{{ $childCategory['category_name'] }}</a></p>
+                                            <div class="col-6"><a href="#">{!! $childCategory['category_name'] !!}</a></div>
                                         @endif
                                     @endforeach
                                 </div>

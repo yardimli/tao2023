@@ -22,3 +22,7 @@ Route::get('/', function () {
 Route::resource('/{pageName}', HeaderController::class);
 
 Route::resource('/insertCategory',CategoriesController::class);
+
+Route::get('/register', function () {
+    return view('register');
+});
