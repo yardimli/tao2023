@@ -19,14 +19,14 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5 text-center">
                                         <a href="index" class="d-block auth-logo">
-                                            <img src="/assets/images/letrapress_logo.png" alt="" height="28"> <span
+                                            <img src="/assets/images/logo.png" alt=""> <span
                                                 class="logo-txt"></span>
                                         </a>
                                     </div>
                                     <div class="auth-content my-auto">
                                         <div class="text-center">
                                             <h5 class="mb-0">Welcome Back !</h5>
-                                            <p class="text-muted mt-2">Sign in to continue to Letrapress.</p>
+                                            <p class="text-muted mt-2">Sign in to continue to Tao 2023.</p>
                                         </div>
                                         <form class="custom-form mt-4 pt-2">
                                             <div class="mb-3">
@@ -105,8 +105,7 @@
                                     <div class="mt-4 mt-md-5 text-center">
                                         <script>
                                             document.write(new Date().getFullYear())
-                                        </script> Letrapress . Crafted with <i
-                                                class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                                        </script> Tao2023</p>
                                     </div>
                                 </div>
                             </div>

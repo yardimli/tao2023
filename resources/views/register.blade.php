@@ -19,7 +19,7 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5 text-center">
                                         <a href="index" class="d-block auth-logo">
-                                            <img src="/assets/images/letrapress_logo.png" alt="" height="28">
+                                            <img src="/assets/images/logo.png" alt="">
                                             <span class="logo-txt"></span>
                                         </a>
                                     </div>
@@ -27,10 +27,10 @@
 
                                         <div class="text-center">
                                             <h5 class="mb-0">Register Account</h5>
-                                            <p class="text-muted mt-2">Get your free Letrapress account now.</p>
+                                            <p class="text-muted mt-2">Get your free Tao2023 account now.</p>
                                         </div>
 
-                                        <form method="POST" action="{{ route('register') }}"
+                                        <form method="POST" action=""
                                               class="needs-validation mt-4 pt-2" novalidate action="index">
                                             @csrf
                                             <div class="mb-3">
@@ -84,7 +84,7 @@
                                             </div>
 
                                             <div class="mb-4">
-                                                <p class="mb-0">By registering you agree to the Letrapress
+                                                <p class="mb-0">By registering you agree to the Tao2023
                                                     <a href="#" class="text-primary">Terms of Use</a>
                                                 </p>
                                             </div>
@@ -128,7 +128,7 @@
 
                                         <div class="mt-5 text-center">
                                             <p class="text-muted mb-0">Already have an account ?
-                                                <a href=" @if (Route::has('login')){{ route('login') }} @endif"
+                                                <a href="/login"
                                                    class="text-primary fw-semibold"> Login
                                                 </a>
                                             </p>
@@ -138,7 +138,7 @@
                                         <script>
                                           document.write(new Date().getFullYear())
                                         </script>
-                                        Letrapress.
+                                        Tao2023.
                                     </div>
                                 </div>
                             </div>
