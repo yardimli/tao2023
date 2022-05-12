@@ -30,8 +30,8 @@
                                             <p class="text-muted mt-2">Get your free Tao2023 account now.</p>
                                         </div>
 
-                                        <form method="POST" action=""
-                                              class="needs-validation mt-4 pt-2" novalidate action="index">
+                                        <form method="POST" action="{{ route('auth.register') }}"
+                                              class="needs-validation mt-4 pt-2" novalidate >
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="useremail" class="form-label">Email</label>

@@ -6,10 +6,14 @@
                 <ul class="social-network heading navbar-nav d-lg-flex align-items-center">
                     <li><a href="#"><i class="icon-facebook"></i></a></li>
                 </ul>
-                <ul class="top-menu heading navbar-nav w-100 d-lg-flex align-items-center">
-                    <li><a href="#" class="btn">Contact</a></li>
-                </ul>
-                <a class="author-avatar" href="#"><img src="/images/author-avata-1.jpg" alt=""></a>
+                @if(isset($LoggedUserInfo['name']))
+                    <a class="author-avatar" href="#"><img src="/images/author-avata-1.jpg" alt="{{ $LoggedUserInfo['name'] }}"></a>
+                    <ul class="top-menu heading navbar-nav w-100 d-lg-flex align-items-center">
+                        <li><a href="{{ route('auth.logout') }}" class="btn">Log Out</a></li>
+                    </ul>
+                @endif
+
+
             </div>
             <form action="#" method="get" class="search-form d-lg-flex float-right">
                 <a href="javascript:void(0)" class="searh-toggle">

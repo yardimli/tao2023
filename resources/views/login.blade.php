@@ -28,11 +28,16 @@
                                             <h5 class="mb-0">Welcome Back !</h5>
                                             <p class="text-muted mt-2">Sign in to continue to Tao 2023.</p>
                                         </div>
-                                        <form class="custom-form mt-4 pt-2">
+                                        <form method="POST" action="{{ route('auth.check') }}" class="custom-form mt-4 pt-2">
+                                            @if(Session::get('fail'))
+                                                <div class="alert alert-danger">{{ Session::get('fail') }}</div>
+                                            @endif
+                                            @csrf
                                             <div class="mb-3">
-                                                <label class="form-label">Username</label>
-                                                <input type="text" class="form-control" id="username"
+                                                <label class="form-label">Email</label>
+                                                <input type="text" class="form-control" id="username" name="email"
                                                     placeholder="Enter username">
+                                                <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="d-flex align-items-start">
@@ -47,11 +52,13 @@
                                                 </div>
 
                                                 <div class="input-group auth-pass-inputgroup">
-                                                    <input type="password" class="form-control" placeholder="Enter password"
+                                                    <input type="password" class="form-control" placeholder="Enter password" name="password"
                                                         aria-label="Password" aria-describedby="password-addon">
                                                     <button class="btn btn-light ms-0" type="button" id="password-addon"><i
                                                             class="mdi mdi-eye-outline"></i></button>
                                                 </div>
+
+                                                <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                                             </div>
                                             <div class="row mb-4">
                                                 <div class="col">

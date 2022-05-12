@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class HeaderController extends Controller
 {
@@ -14,13 +16,14 @@ class HeaderController extends Controller
      */
     public function index($pageName)
     {
-	    $parentCategories = Category::where('parentID','=',0)->get();
-	    $childCategories = Category::where('parentID','!=',0)->get();
+			$data = ['LoggedUserInfo' => User::where('id','=',session('LoggedUser'))->first(),
+				       'parentCategories' => Category::where('parentID','=',0)->get(),
+							 'childCategories' =>  Category::where('parentID','!=',0)->get() ];
+    	$mainPages = ['index','404','archive','author','categories','contact','search','single','typography','welcome','register','login'];
 
-	    return view($pageName, [
-		    'parentCategories' => $parentCategories,
-		    'childCategories' => $childCategories
-	    ]);
+    	if(in_array($pageName, $mainPages)){
+		    return view($pageName,$data);
+	    }
     }
 
     /**
@@ -30,7 +33,7 @@ class HeaderController extends Controller
      */
     public function create()
     {
-        //
+        echo 'create';
     }
 
     /**
@@ -41,7 +44,7 @@ class HeaderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	echo 'store';
     }
 
     /**
