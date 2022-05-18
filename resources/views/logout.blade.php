@@ -44,7 +44,7 @@
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="text-muted mb-0">Don't have an account ? <a href="auth-register"
+                                            <p class="text-muted mb-0">Don't have an account ? <a href="register"
                                                     class="text-primary fw-semibold"> Signup</a> </p>
                                         </div>
                                     </div>

@@ -19,7 +19,7 @@ class HeaderController extends Controller
 			$data = ['LoggedUserInfo' => User::where('id','=',session('LoggedUser'))->first(),
 				       'parentCategories' => Category::where('parentID','=',0)->get(),
 							 'childCategories' =>  Category::where('parentID','!=',0)->get() ];
-    	$mainPages = ['index','404','archive','author','categories','contact','search','single','typography','welcome','register','login'];
+    	$mainPages = ['index','404','archive','author','author_info','categories','contact','search','single','typography','welcome','register','login'];
 
     	if(in_array($pageName, $mainPages)){
 		    return view($pageName,$data);

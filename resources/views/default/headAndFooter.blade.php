@@ -51,7 +51,7 @@
                 <div class="divider"></div>
                 <div class="row">
                     <div class="col-md-6 copyright text-xs-center">
-                        <p>Copyright &copy; 2021 Merinda inc. Designed by <a href="https://alithemes.com">AliThemes.com</a></p>
+                        <p>Copyright &copy; 2023 Tao2023</p>
                     </div>
                     <div class="col-md-6">
                         <ul class="social-network inline text-md-right text-sm-center">
