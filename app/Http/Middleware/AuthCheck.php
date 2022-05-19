@@ -23,20 +23,12 @@ class AuthCheck
             return redirect('/login')->with('fail','You must be logged in');
         }
 
-        //if user is not logged in, then ask them to log in
-//    	if(!session()->has('LoggedUser') && ( $request->path() !== 'login' ) ){
-//    		return redirect('/login')->with('fail','You must be logged in');
-//	    }
 
 	    //if user already log in , and still try to access login and register page
 	    if(session()->has('LoggedUser') && ($request->path() == 'login' || $request->path() == 'register') ){
-		    return back();
+		    return redirect('index');
 	    }
-
-        //if not logged in then allow to go to register
-        if( ($request->path() == 'login' || $request->path() == 'register') ){
-//            return back();
-        }
+	    
 
         //prevent after logout, use browser to click on previous page
         return $next($request)->header('Cache-Control','no-cache, no-store, max-age=0, must-revalidate' )

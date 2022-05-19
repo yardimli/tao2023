@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HeaderController;
-use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +27,15 @@ Route::get('/', function () {
 
 Route::post('/registration',[\App\Http\Controllers\Auth\AuthMainController::class,'register'])->name('auth.register');
 Route::post('/loginCheck',[\App\Http\Controllers\Auth\AuthMainController::class,'check'])->name('auth.check');
+
 Route::get('/logout',[\App\Http\Controllers\Auth\AuthMainController::class,'logout'])->name('auth.logout');
 
 
 Route::resource('/insertCategory',CategoriesController::class);
 
 Route::group(['middleware' => ['AuthCheck']], function(){
+	Route::patch('/updateUserInfo',[\App\Http\Controllers\Auth\AuthMainController::class,'updateUserInfo'])->name('auth.updateUserInfo');
+	Route::patch('/updatePassword',[\App\Http\Controllers\Auth\AuthMainController::class,'updatePassword'])->name('auth.updatePassword');
 	Route::resource('/{pageName}', HeaderController::class);
 });
 

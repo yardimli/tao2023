@@ -45,7 +45,7 @@ class AuthMainController extends Controller
 	public function register(Request $request)
   {
 	  $request->validate([
-		  'name' => ['required', 'string', 'max:255'],
+		  'name' => ['required', 'string', 'max:255','unique:users'],
 		  'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 		  'password' => ['required', 'string', 'min:8', 'confirmed'],
 	  ]);
@@ -80,6 +80,81 @@ class AuthMainController extends Controller
 				//log userId into session
 				$request->session()->put('LoggedUser',$userInfo->id);
 				return redirect('/index');
+			}else{
+				return back()->with('fail','Incorrect password');
+			}
+		}
+	}
+
+
+	public function updateUserInfo(Request $request)
+	{
+		//return $request->input();
+		$userId = session()->get('LoggedUser');
+		$userInfo = User::where('id','=',$userId)->first();
+
+
+
+		if(!$userInfo){
+			return back()->with('fail','We do not recognize your ID');
+		}else{
+			//Validate requests
+			if($request->name !== $userInfo->name){
+				$request->validate([
+					'name' => ['required','string', 'max:255','unique:users'],
+				]);
+			}else if($request->email !== $userInfo->email){
+				$request->validate([
+					'email' => ['required', 'email', 'max:255', 'unique:users'],
+				]);
+			}
+
+			$request->validate([
+				'password' => ['required', 'string', 'min:8'],
+			]);
+
+
+			//check password
+			if(Hash::check($request->password, $userInfo->password)){
+				//update user info
+				$newData = [
+					'name' => $request->name,
+					'email' => $request->email
+				];
+				$userInfo->update($newData);
+
+				return back()->with('success','User Info has been updated.');
+			}else{
+				return back()->with('fail','Incorrect password');
+			}
+		}
+	}
+
+	public function updatePassword(Request $request)
+	{
+
+		//Validate requests
+		$request->validate([
+			'password' => ['required', 'string', 'min:8'],
+			'newpassword' => ['required', 'string', 'min:8', 'confirmed'],
+		]);
+
+		//return $request->input();
+		$userId = session()->get('LoggedUser');
+		$userInfo = User::where('id','=',$userId)->first();
+
+		if(!$userInfo){
+			return back()->with('fail','We do not recognize your ID');
+		}else{
+			//check password
+			if(Hash::check($request->password, $userInfo->password)){
+				//update user info
+				$newData = [
+					'password' => Hash::make($request['newpassword'])
+				];
+				$userInfo->update($newData);
+
+				return back()->with('success','Password has been updated.');
 			}else{
 				return back()->with('fail','Incorrect password');
 			}

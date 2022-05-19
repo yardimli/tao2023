@@ -36,7 +36,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Email</label>
                                                 <input type="text" class="form-control" id="username" name="email"
-                                                    placeholder="Enter username">
+                                                    placeholder="Enter email">
                                                 <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                                             </div>
                                             <div class="mb-3">
