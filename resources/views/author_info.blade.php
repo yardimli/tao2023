@@ -17,7 +17,12 @@
                             <div class="box box-author m_b_2rem">
                                 <div class="post-author row-flex">
                                     <div class="author-img">
-                                        <img alt="author avatar" src="/images/author-avata-1.jpg" class="avatar">
+                                        @if(isset( $LoggedUserInfo['user_image']) && $LoggedUserInfo['user_image'] !== "")
+                                            <img alt="author avatar" src="/userImages/{{ $LoggedUserInfo['user_image'] }}" class="avatar">
+                                        @else
+                                            <img alt="author avatar" src="/images/author-avata-1.jpg" class="avatar">
+                                        @endif
+
                                     </div>
                                     <div class="author-content">
                                         <div class="top-author">
@@ -46,7 +51,7 @@
                                         @endforeach
                                     @endif
 
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updateUserInfo') }}" method="post">
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updateUserInfo') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
 
@@ -63,6 +68,10 @@
                                             <input type="password" id="first-name" class="form-control" placeholder="Enter password confirmation"
                                                    name="password">
                                         </div>
+                                        <div class="form-group">
+                                            <label>Upload User Image :</label>
+                                            <input type="file" id="user_image" class="form-control" name="user_image" style="line-height: unset; cursor: pointer">
+                                        </div>
                                         @if(Session::get('success'))
                                             <div class="alert alert-success">{{ Session::get('success') }}</div>
                                         @elseif(Session::get('fail'))
@@ -72,7 +81,6 @@
                                     </form>
                                 </div>
                             </div>
-
 
                             <div class="card">
                                 <div class="card-header">

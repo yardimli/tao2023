@@ -89,6 +89,7 @@ class AuthMainController extends Controller
 
 	public function updateUserInfo(Request $request)
 	{
+
 		//return $request->input();
 		$userId = session()->get('LoggedUser');
 		$userInfo = User::where('id','=',$userId)->first();
@@ -111,16 +112,25 @@ class AuthMainController extends Controller
 
 			$request->validate([
 				'password' => ['required', 'string', 'min:8'],
+				'user_image' => ['mimes:jpg,png,jpeg', 'max:2048']
 			]);
 
 
 			//check password
 			if(Hash::check($request->password, $userInfo->password)){
 				//update user info
+
 				$newData = [
 					'name' => $request->name,
 					'email' => $request->email
 				];
+
+				if($request->user_image != NULL){
+					$user_imageName = 'User_'.$userId.'.'.$request->user_image->extension();
+					$request->user_image->move(public_path('userImages'),$user_imageName);
+					$newData['user_image'] = $user_imageName;
+				}
+
 				$userInfo->update($newData);
 
 				return back()->with('success','User Info has been updated.');
