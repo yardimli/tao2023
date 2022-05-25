@@ -56,7 +56,9 @@ class AuthMainController extends Controller
 		  'password' => Hash::make($request['password'])
 	  ]);
 
-	  return redirect('index');
+	  $request->session()->put('LoggedUser',$user->id);
+
+	  return redirect('/index');
   }
 
 	public function check(Request $request)
@@ -81,7 +83,7 @@ class AuthMainController extends Controller
 				$request->session()->put('LoggedUser',$userInfo->id);
 				return redirect('/index');
 			}else{
-				return back()->with('fail','Incorrect password');
+				return back()->with(['fail'=>'Incorrect password','email'=>$request->email]);
 			}
 		}
 	}

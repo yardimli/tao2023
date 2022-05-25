@@ -17,10 +17,10 @@
                             <div class="box box-author m_b_2rem">
                                 <div class="post-author row-flex">
                                     <div class="author-img">
-                                        @if(isset( $LoggedUserInfo['user_image']) && $LoggedUserInfo['user_image'] !== "")
+                                        @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" || $LoggedUserInfo['user_image'] !== "NULL" ))
                                             <img alt="author avatar" src="/userImages/{{ $LoggedUserInfo['user_image'] }}" class="avatar">
                                         @else
-                                            <img alt="author avatar" src="/images/author-avata-1.jpg" class="avatar">
+                                            <img alt="author avatar" src="/images/user_default.png" class="avatar">
                                         @endif
 
                                     </div>

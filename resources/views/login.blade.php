@@ -35,8 +35,13 @@
                                             @csrf
                                             <div class="mb-3">
                                                 <label class="form-label">Email</label>
-                                                <input type="text" class="form-control" id="username" name="email"
-                                                    placeholder="Enter email">
+                                                @if(Session::get('email'))
+                                                    <input type="text" class="form-control" id="username" name="email"
+                                                           placeholder="Enter email" value="{{ Session::get('email')  }}">
+                                                @else
+                                                    <input type="text" class="form-control" id="username" name="email"
+                                                           placeholder="Enter email" value="{{ old('email') }}">
+                                                @endif
                                                 <span class="text-danger">@error('email'){{ $message }}@enderror</span>
                                             </div>
                                             <div class="mb-3">

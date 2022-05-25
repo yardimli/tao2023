@@ -7,10 +7,10 @@
                     <li><a href="#"><i class="icon-facebook"></i></a></li>
                 </ul>
                 @if(isset($LoggedUserInfo['name']))
-                    @if(isset( $LoggedUserInfo['user_image']) && $LoggedUserInfo['user_image'] !== "")
+                    @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" || $LoggedUserInfo['user_image'] !== "NULL" ))
                         <a class="author-avatar" href="author_info"><img src="/userImages/{{ $LoggedUserInfo['user_image'] }}" alt="{{ $LoggedUserInfo['name'] }}"></a>
                     @else
-                        <a class="author-avatar" href="author_info"><img src="/images/author-avata-1.jpg" alt="{{ $LoggedUserInfo['name'] }}"></a>
+                        <a class="author-avatar" href="author_info"><img src="/images/user_default.png" alt="{{ $LoggedUserInfo['name'] }}"></a>
                     @endif
                     <ul class="top-menu heading navbar-nav w-100 d-lg-flex align-items-center">
                         <li><a href="{{ route('auth.logout') }}" class="btn">Log Out</a></li>
