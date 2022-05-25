@@ -55,9 +55,11 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="social-network inline text-md-right text-sm-center">
-                            <li class="list-inline-item"><a href="#"><i class="icon-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="icon-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="icon-behance"></i></a></li>
+                            @if(isset( $LoggedUserInfo['facebook_link']))
+                                <li class="list-inline-item"><a href="{{ $LoggedUserInfo['facebook_link'] }}"><i class="icon-facebook"></i></a></li>
+                            @elseif(isset( $LoggedUserInfo['twitter_link']))
+                                <li class="list-inline-item"><a href="{{ $LoggedUserInfo['twitter_link'] }}"><i class="icon-twitter"></i></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>

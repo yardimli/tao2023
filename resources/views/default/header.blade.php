@@ -4,7 +4,10 @@
         <div class="header-right float-right w-50">
             <div class="d-inline-flex float-right text-right align-items-center">
                 <ul class="social-network heading navbar-nav d-lg-flex align-items-center">
-                    <li><a href="#"><i class="icon-facebook"></i></a></li>
+                    @if(isset( $LoggedUserInfo['facebook_link']))
+                        <li><a href="{{ $LoggedUserInfo['facebook_link'] }}"><i class="icon-facebook"></i></a></li>
+                    @endif
+
                 </ul>
                 @if(isset($LoggedUserInfo['name']))
                     @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" || $LoggedUserInfo['user_image'] !== "NULL" ))

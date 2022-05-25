@@ -113,8 +113,9 @@ class AuthMainController extends Controller
 			}
 
 			$request->validate([
+				'introduction' => ['max:1024'],
+				'user_image' => ['mimes:jpg,png,jpeg', 'max:2048'],
 				'password' => ['required', 'string', 'min:8'],
-				'user_image' => ['mimes:jpg,png,jpeg', 'max:2048']
 			]);
 
 
@@ -124,10 +125,14 @@ class AuthMainController extends Controller
 
 				$newData = [
 					'name' => $request->name,
-					'email' => $request->email
+					'email' => $request->email,
+					'introduction' => $request->introduction,
+					'facebook_link' => $request->facebook_link,
+					'twitter_link' => $request->twitter_link,
+
 				];
 
-				if($request->user_image != NULL){
+				if($request->user_image != null){
 					$user_imageName = 'User_'.$userId.'.'.$request->user_image->extension();
 					$request->user_image->move(public_path('userImages'),$user_imageName);
 					$newData['user_image'] = $user_imageName;

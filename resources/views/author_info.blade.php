@@ -27,96 +27,25 @@
                                     <div class="author-content">
                                         <div class="top-author">
                                             <h5 class="heading-font"><a href="author" title="Ryan" rel="author">{{ $LoggedUserInfo['name'] }} </a></h5></div>
-                                        <p class="d-none d-md-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse laoreet ut ligula et
-                                            semper. Aenean consectetur, est id gravida venenatis.</p>
+                                        @if(isset( $LoggedUserInfo['introduction']) && ($LoggedUserInfo['introduction'] !== "" || $LoggedUserInfo['introduction'] !== "NULL" ))
+                                            <p class="d-none d-md-block">{{ $LoggedUserInfo['introduction'] }}</p>
+                                        @else
+                                            <p class="d-none d-md-block">This author is still a mystery.</p>
+                                        @endif
                                         <div class="content-social-author">
-                                            <a target="_blank" class="author-social" href="#">Facebook </a>
-                                            <a target="_blank" class="author-social" href="#">Twitter </a>
-                                            <a target="_blank" class="author-social" href="#"> Google + </a>
+                                            @if(isset( $LoggedUserInfo['facebook_link']))
+                                                <a target="_blank" class="author-social" href="{{ $LoggedUserInfo['facebook_link'] }}">Facebook </a>
+                                            @elseif(isset( $LoggedUserInfo['twitter_link']))
+                                                <a target="_blank" class="author-social" href="{{ $LoggedUserInfo['twitter_link'] }}">Twitter </a>
+                                            @endif
                                         </div>
 
                                     </div>
                                 </div>
+                                <a class="btn btn-green d-inline-block mb-4 mb-md-0" href="edit_profile">Edit Profile</a>
+                                <a class="btn btn-green d-inline-block mb-4 mb-md-0" href="edit_password">Reset Password</a>
                             </div>
 
-                            <div class="card mb-3">
-                                <div class="card-header">
-                                    <h6>Change User Information</h6>
-                                </div>
-                                <div class="card-body">
-                                    @if (count($errors))
-                                        @foreach ($errors->all() as $error)
-
-                                            <p class="alert alert-danger">{{$error}}</p>
-                                        @endforeach
-                                    @endif
-
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updateUserInfo') }}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PATCH')
-
-                                        <div class="form-group">
-                                            <label>Enter New Username :</label>
-                                            <input type="text" id="first-name" class="form-control" placeholder="Enter new username" name="name" value="{{ $LoggedUserInfo['name'] }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Enter New Email :</label>
-                                            <input type="email" id="first-name" placeholder="Enter new email" class="form-control" name="email" value="{{ $LoggedUserInfo['email'] }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Enter Current Password :</label>
-                                            <input type="password" id="first-name" class="form-control" placeholder="Enter password confirmation"
-                                                   name="password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Upload User Image :</label>
-                                            <input type="file" id="user_image" class="form-control" name="user_image" style="line-height: unset; cursor: pointer">
-                                        </div>
-                                        @if(Session::get('success'))
-                                            <div class="alert alert-success">{{ Session::get('success') }}</div>
-                                        @elseif(Session::get('fail'))
-                                            <div class="alert alert-danger">{{ Session::get('fail') }}</div>
-                                        @endif
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6>Change Password with Current Password Validation</h6>
-                                </div>
-                                <div class="card-body">
-                                    @if (count($errors))
-                                        @foreach ($errors->all() as $error)
-                                            <p class="alert alert-danger">{{$error}}</p>
-                                        @endforeach
-                                    @endif
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updatePassword') }}" method="post">
-                                        @csrf
-                                        @method('PATCH')
-                                        <div class="form-group">
-                                            <label>Enter Old Password :</label>
-                                            <input type="password" id="first-name" class="form-control" placeholder="Enter old password" name="password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Enter New Password :</label>
-                                            <input type="password" id="first-name" placeholder="Enter new password" class="form-control" name="newpassword">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Enter Confirm Password :</label>
-                                            <input type="password" id="first-name" class="form-control" placeholder="Enter password confirmation"
-                                                   name="newpassword_confirmation">
-                                        </div>
-                                        @if(Session::get('success'))
-                                            <div class="alert alert-success">{{ Session::get('success') }}</div>
-                                        @elseif(Session::get('fail'))
-                                            <div class="alert alert-danger">{{ Session::get('fail') }}</div>
-                                        @endif
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-4 pl-md-5 sticky-sidebar">
 

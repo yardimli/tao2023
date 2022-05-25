@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserImageToUsersTable extends Migration
+class AddNewUserInfoToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddUserImageToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-	        $table->string('user_image')->default('NULL')->nullable();
+	        $table->longText('introduction')->nullable();
+	        $table->string('twitter_link')->nullable();
+	        $table->string('facebook_link')->nullable();
         });
     }
 
@@ -26,7 +28,9 @@ class AddUserImageToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('user_image');
+	        $table->dropColumn('introduction');
+	        $table->dropColumn('twitter_link');
+	        $table->dropColumn('facebook_link');
         });
     }
 }
