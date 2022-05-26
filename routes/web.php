@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HeaderController;
+use App\Http\Controllers\CropImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::get('/', function () {
 //	return view('index');
 //});
 
+Route::get('crop-image-before-upload-using-croppie', [CropImageController::class,'index']);
+Route::post('crop-image-before-upload-using-croppie',[CropImageController::class,'uploadCropImage'])->name('croppie.upload-image');
+
 
 Route::post('/registration',[\App\Http\Controllers\Auth\AuthMainController::class,'register'])->name('auth.register');
 Route::post('/loginCheck',[\App\Http\Controllers\Auth\AuthMainController::class,'check'])->name('auth.check');
@@ -38,6 +42,7 @@ Route::group(['middleware' => ['AuthCheck']], function(){
 	Route::patch('/updatePassword',[\App\Http\Controllers\Auth\AuthMainController::class,'updatePassword'])->name('auth.updatePassword');
 	Route::resource('/{pageName}', HeaderController::class);
 });
+
 
 
 
