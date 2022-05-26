@@ -17,8 +17,9 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
 
-        //if user is not logged in, but go to the register page
-        if(!session()->has('LoggedUser')  && $request->path() == 'author_info' ){
+        //if user is not logged in, but want to access user info pages
+	    $userInfoPages = ['author_info', 'edit_password', 'edit_profile'];
+        if(!session()->has('LoggedUser')  && in_array($request->path(), $userInfoPages) ){
 //            echo json_encode($request);
             return redirect('/login')->with('fail','You must be logged in');
         }

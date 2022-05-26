@@ -35,14 +35,25 @@
                                             <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                                         @endif
 
-                                        <div class="form-group">
-                                            <label>Enter New Username :</label>
-                                            <input type="text" class="form-control" placeholder="Enter new username" name="name" value="{{ $LoggedUserInfo['name'] }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div id="dropzone">
+                                                    <div>Upload User Image</div>
+                                                    <input type="file" id="user_image" accept="image/*" name="user_image">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label>Enter New Username :</label>
+                                                    <input type="text" class="form-control" placeholder="Enter new username" name="name" value="{{ $LoggedUserInfo['name'] }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Enter New Email :</label>
+                                                    <input type="email" placeholder="Enter new email" class="form-control" name="email" value="{{ $LoggedUserInfo['email'] }}">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Enter New Email :</label>
-                                            <input type="email" placeholder="Enter new email" class="form-control" name="email" value="{{ $LoggedUserInfo['email'] }}">
-                                        </div>
+
                                         <div class="form-group">
                                             <label>About me :</label>
                                             <textarea type="text" placeholder="Write some words to describe yourself" name="introduction">{{ $LoggedUserInfo['introduction'] }}</textarea>
@@ -55,10 +66,13 @@
                                             <label>Enter Twitter Link Url:</label>
                                             <input type="url" placeholder="Enter twitter link url" class="form-control" name="twitter_link" value="{{ $LoggedUserInfo['twitter_link'] }}">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Upload User Image :</label>
-                                            <input type="file" id="user_image" class="form-control" name="user_image" style="line-height: unset; cursor: pointer">
-                                        </div>
+
+                                        {{--<div class="form-group">--}}
+                                            {{--<img id="preview-image-before-upload" src="https://climate.onep.go.th/wp-content/uploads/2020/01/default-image-300x300.jpg"--}}
+                                                 {{--alt="preview image" style="max-height: 150px;">--}}
+                                        {{--</div>--}}
+
+
                                         <div class="form-group">
                                             <label>Enter Current Password :</label>
                                             <input type="password" class="form-control" placeholder="Enter password confirmation"
@@ -74,3 +88,86 @@
             </div>
         </main>
 @endsection('content')
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+        $(function() {
+
+	        $('#dropzone').on('dragover', function() {
+		        $(this).addClass('hover');
+	        });
+
+	        $('#dropzone').on('dragleave', function() {
+		        $(this).removeClass('hover');
+	        });
+
+	        $('#dropzone input').on('change', function(e) {
+		        var file = this.files[0];
+
+		        $('#dropzone').removeClass('hover');
+
+
+		        $('#dropzone').addClass('dropped');
+		        $('#dropzone img').remove();
+
+                var reader = new FileReader(file);
+
+                reader.readAsDataURL(file);
+
+                reader.onload = function(e) {
+                    var data = e.target.result,
+                        $img = $('<img />').attr('src', data).fadeIn();
+
+	                $('#dropzone div').html('');
+                    $('#dropzone').append($img);
+                };
+
+	        });
+        });
+
+</script>
+
+        <style>
+            #dropzone {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 4px dotted #ddd;
+                border-radius: 20px;
+                /*font: 400 18px/200px Cabin;*/
+                height: 170px;
+                width: 170px;
+                margin: 15px auto;
+            }
+
+            #dropzone.hover {
+                border: 4px solid #828282;
+                color: #828282;
+            }
+
+            #dropzone.dropped {
+                background: #222;
+                border: 10px solid #444;
+            }
+
+
+            #dropzone input{
+                height: 100%;
+            }
+
+            #dropzone img {
+                border-radius: 10px;
+                max-width: 95%;
+                max-height: 95%;
+            }
+
+            #dropzone [type="file"] {
+                cursor: pointer;
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        </style>
