@@ -43,10 +43,9 @@
                                                     @else
                                                         <div>Upload User Image</div>
                                                     @endif
-                                                    <input type="file" id="user_image" accept="image/*">
+                                                    <input type="file" id="user_image" class="form-control" name="user_image">
                                                 </div>
                                                 <div id="upload-demo" style="display: none;"></div>
-                                                <input type="hidden" id="user_image_name" name="user_image_name">
                                                 <input type="hidden" id="crop_image" name="crop_image">
                                             </div>
                                             <div class="col-md-8">
@@ -146,8 +145,6 @@
 
 
 							var file = this.files[0];
-							var imageFileName = file['name'];
-							$('#user_image_name').val(imageFileName);
 
 							$('#dropzone').removeClass('hover');
 

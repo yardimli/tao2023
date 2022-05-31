@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\HeaderController;
-use App\Http\Controllers\CropImageController;
 use App\Http\Controllers\AUTH\AuthMainController;
 
 /*
@@ -25,9 +24,6 @@ Route::get('/', function () {
 //Route::get('/index', function () {
 //	return view('index');
 //});
-
-Route::get('crop-image-before-upload-using-croppie', [CropImageController::class,'index']);
-Route::post('crop-image-before-upload-using-croppie',[CropImageController::class,'uploadCropImage'])->name('croppie.upload-image');
 
 
 Route::post('/registration',[AuthMainController::class,'register'])->name('auth.register');
