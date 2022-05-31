@@ -26,7 +26,7 @@
                                         @endforeach
                                     @endif
 
-                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updateUserInfo') }}" method="post" enctype="multipart/form-data">
+                                    <form id="editProfileForm" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updateUserInfo') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
                                         @if(Session::get('success'))
@@ -34,13 +34,20 @@
                                         @elseif(Session::get('fail'))
                                             <div class="alert alert-danger">{{ Session::get('fail') }}</div>
                                         @endif
-
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 text-center">
                                                 <div id="dropzone">
-                                                    <div>Upload User Image</div>
-                                                    <input type="file" id="user_image" accept="image/*" name="user_image">
+                                                    @if(isset( $LoggedUserInfo['user_image']) && $LoggedUserInfo['user_image'] !== "NULL")
+                                                        <img src="/userImages/{{ $LoggedUserInfo['user_image'] }}" alt="profile_image">
+                                                        <div style="position: absolute; background-color: white; padding: 0px 10px; opacity: 0.6;">Upload User Image</div>
+                                                    @else
+                                                        <div>Upload User Image</div>
+                                                    @endif
+                                                    <input type="file" id="user_image" accept="image/*">
                                                 </div>
+                                                <div id="upload-demo" style="display: none;"></div>
+                                                <input type="hidden" id="user_image_name" name="user_image_name">
+                                                <input type="hidden" id="crop_image" name="crop_image">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="form-group">
@@ -68,8 +75,8 @@
                                         </div>
 
                                         {{--<div class="form-group">--}}
-                                            {{--<img id="preview-image-before-upload" src="https://climate.onep.go.th/wp-content/uploads/2020/01/default-image-300x300.jpg"--}}
-                                                 {{--alt="preview image" style="max-height: 150px;">--}}
+                                        {{--<img id="preview-image-before-upload" src="https://climate.onep.go.th/wp-content/uploads/2020/01/default-image-300x300.jpg"--}}
+                                        {{--alt="preview image" style="max-height: 150px;">--}}
                                         {{--</div>--}}
 
 
@@ -78,7 +85,7 @@
                                             <input type="password" class="form-control" placeholder="Enter password confirmation"
                                                    name="password">
                                         </div>
-                                        <button type="submit" class="btn btn-dark">Update</button>
+                                        <button id="updateUserInfo" type="submit" class="btn btn-dark">Update</button>
                                     </form>
                                 </div>
                             </div>
@@ -87,45 +94,90 @@
                 </div>
             </div>
         </main>
-@endsection('content')
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-        $(function() {
-
-	        $('#dropzone').on('dragover', function() {
-		        $(this).addClass('hover');
-	        });
-
-	        $('#dropzone').on('dragleave', function() {
-		        $(this).removeClass('hover');
-	        });
-
-	        $('#dropzone input').on('change', function(e) {
-		        var file = this.files[0];
-
-		        $('#dropzone').removeClass('hover');
 
 
-		        $('#dropzone').addClass('dropped');
-		        $('#dropzone img').remove();
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ asset('js/croppie.js') }}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/croppie.min.css') }}">
+        <script type="text/javascript">
 
-                var reader = new FileReader(file);
 
-                reader.readAsDataURL(file);
+					var resize = $('#upload-demo').croppie({
+						enableExif: true,
+						enableOrientation: true,
+						viewport: { // Default { width: 100, height: 100, type: 'square' }
+							width: 150,
+							height: 150,
+							type: 'circle' //square
+						},
+						boundary: {
+							width: 160,
+							height: 160
+						}
+					});
 
-                reader.onload = function(e) {
-                    var data = e.target.result,
-                        $img = $('<img />').attr('src', data).fadeIn();
 
-	                $('#dropzone div').html('');
-                    $('#dropzone').append($img);
-                };
+					//	$('#dropzone input').on('change', function () {
+					//		var reader = new FileReader();
+					//		reader.onload = function (e) {
+					//			resize.croppie('bind',{
+					//				url: e.target.result
+					//			}).then(function(){
+					//				console.log('jQuery bind complete');
+					//			});
+					//		}
+					//		reader.readAsDataURL(this.files[0]);
+					//	});
 
-	        });
-        });
+					$(function() {
 
-</script>
+						$('#dropzone').on('dragover', function() {
+							$(this).addClass('hover');
+						});
+
+						$('#dropzone').on('dragleave', function() {
+							$(this).removeClass('hover');
+						});
+
+						$('#dropzone input').on('change', function(e) {
+							$("#upload-demo").show();
+							$("#dropzone").css('display','none');
+
+
+							var file = this.files[0];
+							var imageFileName = file['name'];
+							$('#user_image_name').val(imageFileName);
+
+							$('#dropzone').removeClass('hover');
+
+
+							$('#dropzone').addClass('dropped');
+							$('#dropzone img').remove();
+
+							var reader = new FileReader(file);
+							reader.onload = function (e) {
+								resize.croppie('bind',{
+									url: e.target.result
+								}).then(function(){
+									console.log('jQuery bind complete');
+								});
+							}
+							reader.readAsDataURL(file);
+
+						});
+					});
+
+					$('.cr-slider').on('change', function (ev) {
+						resize.croppie('result', {
+							type: 'canvas',
+							size: 'viewport'
+						}).then(function (img) {
+							$("#crop_image").val(img);
+						});
+					});
+
+        </script>
 
         <style>
             #dropzone {
@@ -171,3 +223,5 @@
                 left: 0;
             }
         </style>
+
+@endsection('content')
