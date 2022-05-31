@@ -10,7 +10,7 @@
 
                 </ul>
                 @if(isset($LoggedUserInfo['name']))
-                    @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" || $LoggedUserInfo['user_image'] !== "NULL" ))
+                    @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" && $LoggedUserInfo['user_image'] !== "NULL" ))
                         <a class="author-avatar" href="author_info"><img src="/userImages/{{ $LoggedUserInfo['user_image'] }}" alt="{{ $LoggedUserInfo['name'] }}"></a>
                     @else
                         <a class="author-avatar" href="author_info"><img src="/images/user_default.png" alt="{{ $LoggedUserInfo['name'] }}"></a>
