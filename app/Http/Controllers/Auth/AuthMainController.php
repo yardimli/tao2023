@@ -190,6 +190,34 @@ class AuthMainController extends Controller
 		}
 	}
 
+	public function checkPassword(Request $request)
+	{
+		//Validate requests
+		$request->validate([
+			'password' => ['required', 'string', 'min:8']
+		]);
+
+		//return $request->input();
+		$userId = session()->get('LoggedUser');
+		$userInfo = User::where('id','=',$userId)->first();
+
+		if(!$userInfo){
+			return back()->with('fail','We do not recognize your ID');
+		}else{
+			//check password
+			if(Hash::check($request->password, $userInfo->password)){
+				//update user info
+				return response()->json([
+					'message' => "Success"
+				]);
+			}else{
+				return response()->json([
+					'message' => "Fail"
+				]);
+			}
+		}
+	}
+
 	public function logout(){
 		if(session()->has('LoggedUser')){
 			session()->pull('LoggedUser');

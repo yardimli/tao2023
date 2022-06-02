@@ -73,18 +73,14 @@
                                             <input type="url" placeholder="Enter twitter link url" class="form-control" name="twitter_link" value="{{ $LoggedUserInfo['twitter_link'] }}">
                                         </div>
 
-                                        {{--<div class="form-group">--}}
-                                        {{--<img id="preview-image-before-upload" src="https://climate.onep.go.th/wp-content/uploads/2020/01/default-image-300x300.jpg"--}}
-                                        {{--alt="preview image" style="max-height: 150px;">--}}
-                                        {{--</div>--}}
-
 
                                         <div class="form-group">
                                             <label>Enter Current Password :</label>
-                                            <input type="password" class="form-control" placeholder="Enter password confirmation"
+                                            <input type="password" class="form-control" id="password" placeholder="Enter password confirmation"
                                                    name="password">
+                                            <div id="checkPasswordMsg" style="color: #721c24; margin-top: 5px; display: none;"></div>
                                         </div>
-                                        <button id="updateUserInfo" type="submit" class="btn btn-dark">Update</button>
+                                        <button id="updateUserInfo" type="submit" class="btn btn-dark" disabled>Update</button>
                                     </form>
                                 </div>
                             </div>
@@ -100,7 +96,35 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('css/croppie.min.css') }}">
         <script type="text/javascript">
-
+            //check password to enable the update button
+	        	$('#password').on('keyup', function () {
+	        		var password = $(this).val();
+			        $.ajax({
+				        url: '{{ route('auth.checkPassword') }}',
+				        method: 'post',
+				        dataType: 'json',
+				        data: {  "_token": "{{ csrf_token() }}",
+					        "password": password },
+                success:function(res){
+				        	if(res['message'] == 'Success'){
+						        $('#checkPasswordMsg').hide();
+						        $('#updateUserInfo').prop('disabled', false);
+                  }else{
+						        $('#checkPasswordMsg').html('Incorrect password.');
+						        $('#checkPasswordMsg').show();
+						        $('#updateUserInfo').prop('disabled', true);
+                  }
+				        },error: function (err) {
+					        if (err.status == 422) { // when status code is 422, it's a validation issue
+                    var data = err.responseJSON;
+                    var msg = data['errors']['password'][0];
+						        $('#checkPasswordMsg').html(msg);
+                    $('#checkPasswordMsg').show();
+						        $('#updateUserInfo').prop('disabled', true);
+					        }
+				        }
+		        });
+	        	});
 
 					var resize = $('#upload-demo').croppie({
 						enableExif: true,
@@ -115,19 +139,6 @@
 							height: 160
 						}
 					});
-
-
-					//	$('#dropzone input').on('change', function () {
-					//		var reader = new FileReader();
-					//		reader.onload = function (e) {
-					//			resize.croppie('bind',{
-					//				url: e.target.result
-					//			}).then(function(){
-					//				console.log('jQuery bind complete');
-					//			});
-					//		}
-					//		reader.readAsDataURL(this.files[0]);
-					//	});
 
 					$(function() {
 

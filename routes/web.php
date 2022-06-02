@@ -37,6 +37,7 @@ Route::resource('/insertCategory',CategoriesController::class);
 Route::group(['middleware' => ['AuthCheck']], function(){
 	Route::patch('/updateUserInfo',[AuthMainController::class,'updateUserInfo'])->name('auth.updateUserInfo');
 	Route::patch('/updatePassword',[AuthMainController::class,'updatePassword'])->name('auth.updatePassword');
+	Route::post('/edit_profile',[AuthMainController::class,'checkPassword'])->name('auth.checkPassword');
 	Route::resource('/{pageName}', HeaderController::class);
 });
 
