@@ -26,7 +26,10 @@
                                         @endforeach
                                     @endif
 
-                                    <form id="editProfileForm" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('auth.updateUserInfo') }}" method="post" enctype="multipart/form-data">
+                                    <form id="editProfileForm" data-parsley-validate
+                                          class="form-horizontal form-label-left"
+                                          action="{{ route('auth.updateUserInfo') }}" method="post"
+                                          enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
                                         @if(Session::get('success'))
@@ -38,12 +41,16 @@
                                             <div class="col-md-4 text-center">
                                                 <div id="dropzone">
                                                     @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" && $LoggedUserInfo['user_image'] !== "NULL" ))
-                                                        <img src="/userImages/{{ $LoggedUserInfo['user_image'] }}" alt="profile_image">
-                                                        <div style="position: absolute; background-color: white; padding: 0px 10px; opacity: 0.6;">Upload User Image</div>
+                                                        <img src="/userImages/{{ $LoggedUserInfo['user_image'] }}"
+                                                             alt="profile_image">
+                                                        <div style="position: absolute; background-color: white; padding: 0px 10px; opacity: 0.6;">
+                                                            Upload User Image
+                                                        </div>
                                                     @else
                                                         <div>Upload User Image</div>
                                                     @endif
-                                                    <input type="file" id="user_image" class="form-control" name="user_image">
+                                                    <input type="file" id="user_image" class="form-control"
+                                                           name="user_image">
                                                 </div>
                                                 <div id="upload-demo" style="display: none;"></div>
                                                 <input type="hidden" id="crop_image" name="crop_image">
@@ -51,36 +58,46 @@
                                             <div class="col-md-8">
                                                 <div class="form-group">
                                                     <label>Enter New Username :</label>
-                                                    <input type="text" class="form-control" placeholder="Enter new username" name="name" value="{{ $LoggedUserInfo['name'] }}">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Enter new username" name="name"
+                                                           value="{{ $LoggedUserInfo['name'] }}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Enter New Email :</label>
-                                                    <input type="email" placeholder="Enter new email" class="form-control" name="email" value="{{ $LoggedUserInfo['email'] }}">
+                                                    <input type="email" placeholder="Enter new email"
+                                                           class="form-control" name="email"
+                                                           value="{{ $LoggedUserInfo['email'] }}">
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label>About me :</label>
-                                            <textarea type="text" placeholder="Write some words to describe yourself" name="introduction">{{ $LoggedUserInfo['introduction'] }}</textarea>
+                                            <textarea type="text" placeholder="Write some words to describe yourself"
+                                                      name="introduction">{{ $LoggedUserInfo['introduction'] }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>Enter Facebook Link Url:</label>
-                                            <input type="url" placeholder="Enter facebook link url" class="form-control" name="facebook_link" value="{{ $LoggedUserInfo['facebook_link'] }}">
+                                            <input type="url" placeholder="Enter facebook link url" class="form-control"
+                                                   name="facebook_link" value="{{ $LoggedUserInfo['facebook_link'] }}">
                                         </div>
                                         <div class="form-group">
                                             <label>Enter Twitter Link Url:</label>
-                                            <input type="url" placeholder="Enter twitter link url" class="form-control" name="twitter_link" value="{{ $LoggedUserInfo['twitter_link'] }}">
+                                            <input type="url" placeholder="Enter twitter link url" class="form-control"
+                                                   name="twitter_link" value="{{ $LoggedUserInfo['twitter_link'] }}">
                                         </div>
 
 
                                         <div class="form-group">
                                             <label>Enter Current Password :</label>
-                                            <input type="password" class="form-control" id="password" placeholder="Please enter your password to update settings"
+                                            <input type="password" class="form-control" id="password"
+                                                   placeholder="Please enter your password to update settings"
                                                    name="password">
-                                            <div id="checkPasswordMsg" style="color: #721c24; margin-top: 5px; display: none;"></div>
+                                            <div id="checkPasswordMsg"
+                                                 style="color: #721c24; margin-top: 5px; display: none;"></div>
                                         </div>
-                                        <button id="updateUserInfo" type="submit" class="btn btn-dark" disabled>Update</button>
+                                        <button id="updateUserInfo" type="submit" class="btn btn-dark" disabled>Update
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -93,38 +110,41 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="{{ asset('js/croppie.js') }}"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('css/croppie.min.css') }}">
         <script type="text/javascript">
-            //check password to enable the update button
-	        	$('#password').on('keyup', function () {
-	        		var password = $(this).val();
-			        $.ajax({
-				        url: '{{ route('auth.checkPassword') }}',
-				        method: 'post',
-				        dataType: 'json',
-				        data: {  "_token": "{{ csrf_token() }}",
-					        "password": password },
-                success:function(res){
-				        	if(res['message'] == 'Success'){
-						        $('#checkPasswordMsg').hide();
-						        $('#updateUserInfo').prop('disabled', false);
-                  }else{
-						        $('#checkPasswordMsg').html('Incorrect password.');
-						        $('#checkPasswordMsg').show();
-						        $('#updateUserInfo').prop('disabled', true);
-                  }
-				        },error: function (err) {
-					        if (err.status == 422) { // when status code is 422, it's a validation issue
-                    var data = err.responseJSON;
-                    var msg = data['errors']['password'][0];
-						        $('#checkPasswordMsg').html(msg);
-                    $('#checkPasswordMsg').show();
-						        $('#updateUserInfo').prop('disabled', true);
-					        }
-				        }
-		        });
-	        	});
+					//check password to enable the update button
+					$('#password').on('keyup', function () {
+						var password = $(this).val();
+						$.ajax({
+							url: '{{ route('auth.checkPassword') }}',
+							method: 'post',
+							dataType: 'json',
+							data: {
+								"_token": "{{ csrf_token() }}",
+								"password": password
+							},
+							success: function (res) {
+								if (res['message'] == 'Success') {
+									$('#checkPasswordMsg').hide();
+									$('#updateUserInfo').prop('disabled', false);
+								} else {
+									$('#checkPasswordMsg').html('Incorrect password.');
+									$('#checkPasswordMsg').show();
+									$('#updateUserInfo').prop('disabled', true);
+								}
+							}, error: function (err) {
+								if (err.status == 422) { // when status code is 422, it's a validation issue
+									var data = err.responseJSON;
+									var msg = data['errors']['password'][0];
+									$('#checkPasswordMsg').html(msg);
+									$('#checkPasswordMsg').show();
+									$('#updateUserInfo').prop('disabled', true);
+								}
+							}
+						});
+					});
 
 					var resize = $('#upload-demo').croppie({
 						enableExif: true,
@@ -140,19 +160,19 @@
 						}
 					});
 
-					$(function() {
+					$(function () {
 
-						$('#dropzone').on('dragover', function() {
+						$('#dropzone').on('dragover', function () {
 							$(this).addClass('hover');
 						});
 
-						$('#dropzone').on('dragleave', function() {
+						$('#dropzone').on('dragleave', function () {
 							$(this).removeClass('hover');
 						});
 
-						$('#dropzone input').on('change', function(e) {
+						$('#dropzone input').on('change', function (e) {
 							$("#upload-demo").show();
-							$("#dropzone").css('display','none');
+							$("#dropzone").css('display', 'none');
 
 
 							var file = this.files[0];
@@ -165,9 +185,9 @@
 
 							var reader = new FileReader(file);
 							reader.onload = function (e) {
-								resize.croppie('bind',{
+								resize.croppie('bind', {
 									url: e.target.result
-								}).then(function(){
+								}).then(function () {
 									console.log('jQuery bind complete');
 								});
 							}
@@ -176,7 +196,8 @@
 						});
 					});
 
-					$('.cr-slider').on('change', function (ev) {
+					$('#upload-demo').on('update.croppie', function (ev, cropData) {
+
 						resize.croppie('result', {
 							type: 'canvas',
 							size: 'viewport'
@@ -184,6 +205,7 @@
 							$("#crop_image").val(img);
 						});
 					});
+
 
         </script>
 
@@ -210,8 +232,7 @@
                 border: 10px solid #444;
             }
 
-
-            #dropzone input{
+            #dropzone input {
                 height: 100%;
             }
 
