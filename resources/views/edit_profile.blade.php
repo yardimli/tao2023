@@ -98,6 +98,7 @@
                                         </div>
                                         <button id="updateUserInfo" type="submit" class="btn btn-dark" disabled>Update
                                         </button>
+                                        <span style="color:red; font-size: 14px;" class="update_warning">Please enter your password before click update.</span>
                                     </form>
                                 </div>
                             </div>
@@ -251,6 +252,16 @@
                 bottom: 0;
                 left: 0;
             }
+
+            .update_warning{
+                display: none;
+            }
+
+            #updateUserInfo:hover + .update_warning{
+                display: inline-block;
+            }
+
+
         </style>
 
 @endsection('content')
