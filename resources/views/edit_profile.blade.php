@@ -37,7 +37,7 @@
                                         <div class="row">
                                             <div class="col-md-4 text-center">
                                                 <div id="dropzone">
-                                                    @if(isset( $LoggedUserInfo['user_image']) && $LoggedUserInfo['user_image'] !== "NULL")
+                                                    @if(isset( $LoggedUserInfo['user_image']) && ($LoggedUserInfo['user_image'] !== "" && $LoggedUserInfo['user_image'] !== "NULL" ))
                                                         <img src="/userImages/{{ $LoggedUserInfo['user_image'] }}" alt="profile_image">
                                                         <div style="position: absolute; background-color: white; padding: 0px 10px; opacity: 0.6;">Upload User Image</div>
                                                     @else
@@ -76,7 +76,7 @@
 
                                         <div class="form-group">
                                             <label>Enter Current Password :</label>
-                                            <input type="password" class="form-control" id="password" placeholder="Enter password confirmation"
+                                            <input type="password" class="form-control" id="password" placeholder="Please enter your password to update settings"
                                                    name="password">
                                             <div id="checkPasswordMsg" style="color: #721c24; margin-top: 5px; display: none;"></div>
                                         </div>
