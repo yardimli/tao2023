@@ -16,15 +16,21 @@
                         <a class="author-avatar" href="author_info"><img src="/images/user_default.png" alt="{{ $LoggedUserInfo['name'] }}"></a>
                     @endif
                     <ul class="top-menu heading navbar-nav w-100 d-lg-flex align-items-center">
-                        <li><a href="{{ route('auth.logout') }}" class="btn">Log Out</a></li>
+                        <li><a href="{{ route('auth.logout') }}" class="btn">{{__("header.logout")}}</a></li>
                     </ul>
                 @else
                     <ul class="top-menu heading navbar-nav w-100 d-lg-flex align-items-center">
-                        <li><a href="login" class="btn">Log In</a></li>
+                        <li><a href="login" class="btn">{{__("header.login")}}</a></li>
                     </ul>
                 @endif
 
 
+            </div>
+            <div class="lang_setting float-right d-md-flex w-30">
+                <select onchange="changeLanguage(this.value)">
+                    <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">{{__("header.English")}}</option>
+                    <option {{session()->has('lang_code')?(session()->get('lang_code')=='zh_tw'?'selected':''):''}} value="zh_tw">{{__("header.ChineseTW")}}</option>
+                </select>
             </div>
             <form action="#" method="get" class="search-form d-lg-flex float-right">
                 <a href="javascript:void(0)" class="searh-toggle">
@@ -40,8 +46,8 @@
     <div class="container">
         <div class="menu-primary">
             <ul>
-                <li class="current-menu-item"><a href="index">Home</a></li>
-                <li class="menu-item-has-children"><a href="categories">Categories</a>
+                <li class="current-menu-item"><a href="index">{{__("header.Home")}}</a></li>
+                <li class="menu-item-has-children"><a href="categories">{{__("header.Categories")}}</a>
                     <ul class="sub-menu">
                         @foreach( $parentCategories as $parentCategory)
                             <li class="menu-item-has-children"><a href="#">{{ $parentCategory['category_name'] }}</a>
@@ -56,18 +62,18 @@
                         @endforeach
                     </ul>
                 </li>
-                <li><a href="typography">Typography</a></li>
-                <li><a href="categories">Politics</a></li>
-                <li><a href="categories">Health</a></li>
-                <li><a href="categories">Design</a></li>
-                <li><a href="categories">Startups</a></li>
-                <li><a href="categories">Culture</a></li>
-                <li><a href="contact">Contact</a></li>
-                <li class="menu-item-has-children"><a href="#">More...</a>
+                <li><a href="typography">{{__("header.Typography")}}</a></li>
+                <li><a href="categories">{{__("header.Politics")}}</a></li>
+                <li><a href="categories">{{__("header.Health")}}</a></li>
+                <li><a href="categories">{{__("header.Design")}}</a></li>
+                <li><a href="categories">{{__("header.Startups")}}</a></li>
+                <li><a href="categories">{{__("header.Culture")}}</a></li>
+                <li><a href="contact">{{__("header.Contact")}}</a></li>
+                <li class="menu-item-has-children"><a href="#">{{__("header.More")}}</a>
                     <ul class="sub-menu">
-                        <li><a href="search">Search</a></li>
-                        <li><a href="author">Author</a></li>
-                        <li><a href="404">404</a></li>
+                        <li><a href="search">{{__("header.Search")}}</a></li>
+                        <li><a href="author">{{__("header.Author")}}</a></li>
+                        <li><a href="404">{{__("header.404")}}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -75,3 +81,10 @@
         </div>
     </div>
 </nav>
+
+<script>
+	function changeLanguage(lang){
+		console.log(lang);
+		window.location='{{url("change-language")}}/'+lang;
+	}
+</script>

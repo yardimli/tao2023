@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App;
 
 class HeaderController extends Controller
 {
@@ -20,7 +21,7 @@ class HeaderController extends Controller
 				       'parentCategories' => Category::where('parentID','=',0)->get(),
 							 'childCategories' =>  Category::where('parentID','!=',0)->get() ];
     	$mainPages = ['index','404','archive','author','author_info','categories','contact','search','single','typography','welcome','register','login','edit_password','edit_profile'];
-//
+
     	if(in_array($pageName, $mainPages)){
 		    return view($pageName,$data);
 	    }else{
@@ -33,9 +34,11 @@ class HeaderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function changeLang($langcode)
     {
-        echo 'create';
+	    App::setLocale($langcode);
+	    session()->put("lang_code",$langcode);
+	    return redirect()->back();
     }
 
     /**

@@ -21,8 +21,9 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/index', function () {
-//	return view('index');
+//Route::get('/test', function () {
+////	App::setLocale('en');
+//	return trans('auth.throttle', ['seconds' => 5]);
 //});
 
 
@@ -35,6 +36,7 @@ Route::get('/logout',[AuthMainController::class,'logout'])->name('auth.logout');
 Route::resource('/insertCategory',CategoriesController::class);
 
 Route::group(['middleware' => ['AuthCheck']], function(){
+	Route::get('/change-language/{lang}',"\App\Http\Controllers\HeaderController@changeLang");
 	Route::patch('/updateUserInfo',[AuthMainController::class,'updateUserInfo'])->name('auth.updateUserInfo');
 	Route::patch('/updatePassword',[AuthMainController::class,'updatePassword'])->name('auth.updatePassword');
 	Route::post('/edit_profile',[AuthMainController::class,'checkPassword'])->name('auth.checkPassword');
