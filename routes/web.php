@@ -41,7 +41,11 @@ Route::group(['prefix' => '{locale}',
 	Route::patch('updateUserInfo',[AuthMainController::class,'updateUserInfo'])->name('auth.updateUserInfo');
 	Route::patch('updatePassword',[AuthMainController::class,'updatePassword'])->name('auth.updatePassword');
 	Route::post('edit_profile',[AuthMainController::class,'checkPassword'])->name('auth.checkPassword');
-	Route::get('{pageName}', [HeaderController::class,'index'])->name('mainRoute');;
+//	Route::get('{pageName}', [HeaderController::class,'index'])->name('mainRoute');
+
+	Route::resource('{pageName}', HeaderController::class)->only(['index'])->names([
+		'index' => 'mainRoute'
+	]);
 });
 
 

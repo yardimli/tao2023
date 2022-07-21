@@ -47,7 +47,6 @@
     <div class="container">
         <div class="menu-primary">
             <ul>
-                <li class="current-menu-item"><a href="index">HomeWithLang</a></li>
                 <li class="current-menu-item"><a href="index">{{__("header.Home")}}</a></li>
                 <li class="menu-item-has-children"><a href="categories">{{__("header.Categories")}}</a>
                     <ul class="sub-menu">
