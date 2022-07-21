@@ -27,9 +27,10 @@
 
             </div>
             <div class="lang_setting float-right d-md-flex w-30">
-                <select onchange="changeLanguage(this.value)">
-                    <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">{{__("header.English")}}</option>
-                    <option {{session()->has('lang_code')?(session()->get('lang_code')=='zh_tw'?'selected':''):''}} value="zh_tw">{{__("header.ChineseTW")}}</option>
+                <select onchange="changeLanguage( this.value )">
+                    @foreach (config('app.available_locales') as $locale)
+                        <option {{ app()->getLocale() == $locale ? 'selected':'' }} value="{{route(\Illuminate\Support\Facades\Route::currentRouteName(),array_merge(Route::current()->parameters(),['locale'=> $locale,'pageName'=> last(request()->segments())]))}}">{{__("header.$locale")}}</option>
+                    @endforeach
                 </select>
             </div>
             <form action="#" method="get" class="search-form d-lg-flex float-right">
@@ -46,6 +47,7 @@
     <div class="container">
         <div class="menu-primary">
             <ul>
+                <li class="current-menu-item"><a href="index">HomeWithLang</a></li>
                 <li class="current-menu-item"><a href="index">{{__("header.Home")}}</a></li>
                 <li class="menu-item-has-children"><a href="categories">{{__("header.Categories")}}</a>
                     <ul class="sub-menu">
@@ -83,8 +85,10 @@
 </nav>
 
 <script>
-	function changeLanguage(lang){
-		console.log(lang);
-		window.location='{{url("change-language")}}/'+lang;
+	function changeLanguage(url){
+      window.location=url;
 	}
+
+
 </script>
+

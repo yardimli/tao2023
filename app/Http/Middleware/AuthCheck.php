@@ -18,11 +18,6 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
 
-    	//set language
-	    if(session()->has("lang_code")){
-		    App::setLocale(session()->get("lang_code"));
-	    }
-
         //if user is not logged in, but want to access user info pages
 	    $userInfoPages = ['author_info', 'edit_password', 'edit_profile'];
         if(!session()->has('LoggedUser')  && in_array($request->path(), $userInfoPages) ){

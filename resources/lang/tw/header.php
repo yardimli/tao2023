@@ -15,8 +15,8 @@ return [
 
 	'logout' => '登出',
 	'login' => '登入',
-	'English' => '英文',
-	'ChineseTW' => '繁體中文',
+	'en' => '英文',
+	'tw' => '繁體中文',
 	'Home' => '主頁',
 	'Categories' => '分類',
 	'Typography' => '排版',

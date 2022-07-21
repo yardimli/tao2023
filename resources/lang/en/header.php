@@ -15,8 +15,8 @@ return [
 
 	'logout' => 'Log Out',
 	'login' => 'Log In',
-	'English' => 'English',
-	'ChineseTW' => 'Chinese TW',
+	'en' => 'English',
+	'tw' => 'Chinese TW',
 	'Home' => 'Home',
 	'Categories' => 'Categories',
 	'Typography' => 'Typography',

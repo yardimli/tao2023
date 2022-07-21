@@ -15,30 +15,19 @@ class HeaderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pageName)
+    public function index($locale,$pageName)
     {
 			$data = ['LoggedUserInfo' => User::where('id','=',session('LoggedUser'))->first(),
 				       'parentCategories' => Category::where('parentID','=',0)->get(),
 							 'childCategories' =>  Category::where('parentID','!=',0)->get() ];
     	$mainPages = ['index','404','archive','author','author_info','categories','contact','search','single','typography','welcome','register','login','edit_password','edit_profile'];
 
+
     	if(in_array($pageName, $mainPages)){
 		    return view($pageName,$data);
 	    }else{
     		return view('404',$data);
 	    }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function changeLang($langcode)
-    {
-	    App::setLocale($langcode);
-	    session()->put("lang_code",$langcode);
-	    return redirect()->back();
     }
 
     /**
