@@ -47,10 +47,8 @@ class StoryController extends Controller
 						}
 					} else {
 						if ($row !== 1 ) {
-//							echo $data[10].'-----------'.$data[3].'------Name15:'.$data[15].'------Name:'.$data[16].'!!!------'.$data[18].'--------------'.'<br>';
+//							echo $data[4].'--------------'.'<br>';
 							$authorID = $this->saveAuthor($data[20], $data[21]);
-							$this->saveTags($data[4]);
-
 							$this->saveStory($data[2],$data[3],$data[4],$authorID);
 
 						}
@@ -82,7 +80,7 @@ class StoryController extends Controller
 				//download author image
 				$info = pathinfo($authorImage);
 				$imageName = $info['filename'].'.png';
-				if(!file_exists('authorImages/' . $imageName)) {
+				if(!file_exists('../storage/app/authorImages/' . $imageName)) {
 					if ($authorImage !== "/dist/img/anon.jpg") {
 						$contents = file_get_contents($authorImage);
 						Storage::put('authorImages/' . $imageName, $contents);
@@ -106,26 +104,6 @@ class StoryController extends Controller
 
 	}
 
-	private function saveTags($story_tags)
-	{
-
-		//get story tags
-		preg_match('/"story_tags":"(.*)"/', $story_tags, $tags);
-		$tagsArr = explode('\n',$tags[1]);
-		foreach ($tagsArr as $tag){
-			$tagName = trim($tag);
-			if($tagName !== ""){
-				$tagInfo = Tag::where('tagName', '=', $tagName)->first();
-				if (!$tagInfo) {
-					Tag::create([
-						'tagName' => $tagName
-					]);
-					echo "Tag : " . $tag . " added.<br>";
-				}
-			}
-		}
-	}
-
 
 	private function saveStory($imageSrc,$name,$tags,$authorID)
 	{
@@ -135,7 +113,7 @@ class StoryController extends Controller
 			//download author image
 			$info = pathinfo($imageSrc);
 			$imageName = $info['filename'].'.png';
-			if(!file_exists('storyImages/'.$imageName)){
+			if(!file_exists('../storage/app/storyImages/'.$imageName)){
 				if($imageSrc !== "/dist/img/nocover-new-min.png"){
 					$contents = file_get_contents($imageSrc);
 					Storage::put('storyImages/'.$imageName, $contents);
@@ -156,23 +134,29 @@ class StoryController extends Controller
 			$storyId = $storyInfo->id;
 		}
 
-		//get story tag id from tags table
+		//get story tags id
 		preg_match('/"story_tags":"(.*)"/', $tags, $story_tags);
 		$tagsArr = explode('\n',$story_tags[1]);
 		foreach ($tagsArr as $tag){
 			$tagName = trim($tag);
 			if($tagName !== ""){
 				$tagInfo = Tag::where('tagName', '=', $tagName)->first();
-				if ($tagInfo) {
+				if (!$tagInfo){
+					$newTag = Tag::create([
+						'tagName' => $tagName
+					]);
+					echo "Tag : " . $tag . " added.<br>";
+					$tag_id = $newTag->id;
+				} else{
 					$tag_id = $tagInfo->id;
+				}
 
-					$storyTagInfo = Story_tag::where('story_id', '=', $storyId)->where('tag_id', '=', $tag_id)->first();
-					if(!$storyTagInfo){
-						Story_tag::create([
-							'story_id' => $storyId,
-							'tag_id' => $tag_id
-						]);
-					}
+				$storyTagInfo = Story_tag::where('story_id', '=', $storyId)->where('tag_id', '=', $tag_id)->first();
+				if(!$storyTagInfo){
+					Story_tag::create([
+						'story_id' => $storyId,
+						'tag_id' => $tag_id
+					]);
 				}
 			}
 		}
