@@ -58,7 +58,7 @@ class AuthMainController extends Controller
 
 		$request->session()->put('LoggedUser',$user->id);
 
-		return redirect('/index');
+		return redirect(app()->getLocale().'/index');
 	}
 
 	public function check(Request $request)
@@ -81,7 +81,7 @@ class AuthMainController extends Controller
 			if(Hash::check($request->password, $userInfo->password)){
 				//log userId into session
 				$request->session()->put('LoggedUser',$userInfo->id);
-				return redirect('/index');
+				return redirect(app()->getLocale().'/index');
 			}else{
 				return back()->with(['fail'=>'Incorrect password','email'=>$request->email]);
 			}
@@ -221,7 +221,7 @@ class AuthMainController extends Controller
 	public function logout(){
 		if(session()->has('LoggedUser')){
 			session()->pull('LoggedUser');
-			return redirect('login');
+			return redirect(app()->getLocale().'/login');
 
 		}
 	}
