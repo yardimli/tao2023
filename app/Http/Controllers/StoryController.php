@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Models\Tag;
 use App\Models\Story;
+use App\Models\Chapter;
 use App\Models\Story_tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -47,9 +48,11 @@ class StoryController extends Controller
 						}
 					} else {
 						if ($row !== 1 ) {
-//							echo $data[4].'--------------'.'<br>';
+//							echo $data[19].'--------------'.'<br>';
 							$authorID = $this->saveAuthor($data[20], $data[21]);
-							$this->saveStory($data[2],$data[3],$data[4],$authorID);
+							$storyID = $this->saveStory($data[2],$data[3],$data[4],$authorID);
+							$this->saveChapter($data[16],$data[19],$storyID);
+
 
 						}
 
@@ -159,6 +162,26 @@ class StoryController extends Controller
 					]);
 				}
 			}
+		}
+
+		return $storyId;
+	}
+
+	private function saveChapter($chapter_name,$chapter_text,$storyID)
+	{
+
+		$chapterInfo = Chapter::where('name', '=', $chapter_name)->first();
+		if (!$chapterInfo) {
+			//save author into database
+			$newChapter = Chapter::create([
+				'name' => $chapter_name,
+				'content' => $chapter_text,
+				'story_id' => $storyID
+			]);
+
+			echo "Chapter : " . $chapter_name . " added.<br>";
+
+//			$chapterId = $newChapter->id;
 		}
 	}
 }
