@@ -28,7 +28,7 @@
 
                                     <form id="editProfileForm" data-parsley-validate
                                           class="form-horizontal form-label-left"
-                                          action="{{ route('auth.updateUserInfo') }}" method="post"
+                                          action="{{ route('auth.updateUserInfo',[app()->getLocale()]) }}" method="post"
                                           enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
@@ -119,7 +119,7 @@
 					$('#password').on('keyup', function () {
 						var password = $(this).val();
 						$.ajax({
-							url: '{{ route('auth.checkPassword') }}',
+							url: '{{ route('auth.checkPassword',[app()->getLocale()]) }}',
 							method: 'post',
 							dataType: 'json',
 							data: {

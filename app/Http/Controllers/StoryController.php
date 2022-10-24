@@ -33,7 +33,7 @@ class StoryController extends Controller
 
 			$row = 1;
 			if (($handle = fopen($csv, "r")) !== FALSE) {
-				while (($data = fgetcsv($handle, 1024*1024*10)) !== FALSE && $row<50) {
+				while (($data = fgetcsv($handle, 1024*1024*10)) !== FALSE) { //} && $row<50) {
 
 					$num = count($data);
 
@@ -48,7 +48,7 @@ class StoryController extends Controller
 						}
 					} else {
 						if ($row !== 1 ) {
-//							echo $data[19].'--------------'.'<br>';
+							echo $data[3].'--------------'.'<br>';
 							$authorID = $this->saveAuthor($data[20], $data[21]);
 							$storyID = $this->saveStory($data[2],$data[3],$data[4],$authorID);
 							$this->saveChapter($data[16],$data[19],$storyID);
@@ -74,7 +74,7 @@ class StoryController extends Controller
 
 	private function saveAuthor($authorName, $authorImage)
 	{
-		echo "Author : " . $authorName . " : " . $authorImage ." => ";
+		echo "<br>Author : " . $authorName . " : " . $authorImage ." => ";
 
 		if ($authorName !== "") {
 			$authorInfo = Author::where('name', '=', $authorName)->first();
@@ -100,6 +100,7 @@ class StoryController extends Controller
 
 				return $newAuthor->id;
 			}else{
+                echo "Already exists.<br>";
 				return $authorInfo->id;
 			}
 		}
@@ -134,6 +135,7 @@ class StoryController extends Controller
 
 			$storyId = $newStory->id;
 		}else{
+            echo "Story found: " . $name . " not adding.<br>";
 			$storyId = $storyInfo->id;
 		}
 
@@ -151,6 +153,7 @@ class StoryController extends Controller
 					echo "Tag : " . $tag . " added.<br>";
 					$tag_id = $newTag->id;
 				} else{
+                    echo "Tag Found: " . $tag . " not added.<br>";
 					$tag_id = $tagInfo->id;
 				}
 
@@ -182,6 +185,9 @@ class StoryController extends Controller
 			echo "Chapter : " . $chapter_name . " added.<br>";
 
 //			$chapterId = $newChapter->id;
-		}
+		} else
+        {
+            echo "Chapter found: " . $chapter_name . " not adding.<br>";
+        }
 	}
 }
